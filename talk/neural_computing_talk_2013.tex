@@ -1,0 +1,456 @@
+\documentclass{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{url}
+
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}[frame number]
+
+\usetheme{Dresden}
+\usecolortheme{rose}
+
+\title[Circuit Architecture: Embryonics Approach]
+{Bio-inspired circuit architectures\\- The Embryonics Approach -}
+
+\author[Frank Lange]{Frank Lange\\
+\ \newline
+\tiny \url{langefrq@informatik.hu-berlin.de}}
+
+\institute[IfI -- HU Berlin]
+{Institut für Informatik\\ Humboldt-Universität zu Berlin}
+
+
+
+\begin{document}
+
+
+
+
+\frame{
+  \titlepage
+}
+
+
+%######################
+% Introduction / Setup
+%######################
+
+\section{Introduction / Setup}
+
+\frame{
+	\begin{block}{Table of Content}
+
+		\begin{itemize}
+			\item Introduction
+			\item Self-Replicating Hardware
+			\item Self-Repairing Hardware
+			\item Conclusion
+		\end{itemize}
+
+	\end{block}
+}
+
+
+\frame{
+	Want?
+	\pause
+
+	\begin{itemize}
+		\item Mass production of future generations of\\
+		      integrated circuits (nanoelectronics)
+
+		\item Achieve John v. Neumanns dream of a self-replicating
+		      automata endowed with universal properties of
+		      yadda yadda...
+	\end{itemize}
+	\
+	\pause
+
+	Need?
+	\pause
+
+	\begin{itemize}
+		\item Self-replication to efficiently mass produce
+
+		\item Self-repair to achieve high fault tolerance rate\\
+		      (e.g. against production faults)
+	\end{itemize}
+}
+
+
+\frame{
+	\begin{center}
+	How to achieve?
+	\end{center}
+}
+
+
+\frame{
+	\begin{center}
+	Study nature!
+	\end{center}
+}
+
+
+\frame{
+	Species:
+	\pause
+
+	\begin{itemize}
+		\item Population level:\\
+		      multiple independent organisms, each
+		      containing the genome of the entire species
+		\ \newline
+		\pause
+
+
+		\item Organism level:\\
+		      multiple coorperating cells, each containing the
+		      complete DNA but only executes a tiny part of it
+		\ \newline
+		\pause
+
+
+		\item Cellular level:\\
+		      consists of 'molecular' elements which produce the
+		      proteins needed for survial
+
+
+
+	\end{itemize}
+}
+
+
+\frame{
+	Multicellular organisms:
+	\pause
+
+	\begin{itemize}
+		\item consist of a finite number of cells, each belonging to
+		      certain group of 'specialists'
+		\ \newline
+		\pause
+
+		\item are build, starting with one cell and using cellular
+		      division to construct new cells as copies of the
+		      original
+		\ \newline
+		\pause
+
+		\item most cells have a unique function that characterizes
+		      them, but some don't and can virtually become anything\\
+		      (nature's void pointers)
+	\end{itemize}
+}
+
+
+\frame{
+	\makebox[\textwidth]{\pgfimage[width=200pt]{4Level.png}}
+	\begin{center}
+		\tiny http://www-users.york.ac.uk/~gt512/Images/4Level.gif
+		      12.01.'13 - 12:20 CET
+	\end{center}
+}
+
+
+\frame{
+	\textbf{F}ield \textbf{P}rogrammable \textbf{G}ate \textbf{A}rray :\\
+	\ \newline
+	\makebox[\textwidth]{\pgfimage[width=220pt]{fpga.png}}
+	\footnote{
+		\tiny http://upload.wikimedia.org/commons/6/6b/Logic\_block2.svg
+		\ 26.01.'13 - 12:31 CET
+	}
+}
+
+
+%####################
+% Self - Replication
+%####################
+
+\section{Self-Replication}
+
+
+\frame{
+	\begin{center}
+		\makebox[\textwidth]{\pgfimage[width=100pt]{drawing_hands.jpg}}
+	\end{center}
+
+	\begin{itemize}
+	\item Self Replication of organisms using 'cellular division'
+	\ \newline
+	\item Properties of cells:
+	\begin{itemize}
+		\item each cell contains the whole program (genome)
+		\ \newline
+
+		\item each cell knows it's position inside the organism
+		\ \newline
+
+		\item only executes part of the genome determined by it's
+		      position
+		\ \newline
+
+		\item coordinates of new cells achieved through cycling
+		       (modulo)
+	\end{itemize}
+	\end{itemize}
+}
+
+
+\frame{
+	\begin{center}
+		\makebox[\textwidth]{\pgfimage[width=300pt]{cell_coords.png}}
+
+		\ \newline
+		\ \newline
+
+		\tiny http://lslwww.epfl.ch/pages/embryonics/thesis/Thesis-11.gif
+		      12.01.'13 - 12:27 CET
+	\end{center}
+}
+
+\frame{
+	How to realize 'cellular division', which in our case means,\\
+	copying the program of one cell into others?
+}
+
+
+\frame{
+	Multi-Molecular organization of a cell:
+	\begin{itemize}
+		\item each cell consists of a finite number of molecules
+		\ \newline
+		\pause
+
+		\item a molecule is a new type of 'FPGA'\\
+		      (field programmable gate array)
+		\ \newline
+		\pause
+
+		\item the logical function of each molecule can be programmed
+		\ \newline
+		\pause
+
+		\item the sum the functions of the molecules make up the cell
+		      and the specific part of the overall genome this cell
+		      executes
+	\end{itemize}
+}
+
+
+
+\frame{
+	\begin{center}
+		\makebox[\textwidth]{\pgfimage[width=200pt]{molcode2.jpg}}
+	\end{center}
+}
+
+
+
+
+%#################
+% Self - Repair
+%#################
+
+
+\section{Self-Repair}
+
+\frame{
+	What we demand of self-repair:
+	\begin{itemize}
+		\item on-line repair mechanism, so we don't have to 'shutdown'
+		      the system
+		\ \newline
+
+		\item no centralized control mechanism, all should be handled
+		      as local as possible
+		\ \newline
+
+		\item self-repair on as much levels as possible\\
+		      (population, organism, cell and molecule)
+	\end{itemize}
+}
+
+
+\frame{
+	\begin{center}
+		But how?!
+	\end{center}
+}
+
+
+\frame{
+	\begin{center}
+		By \textbf{not} using self-repair!
+	\end{center}
+}
+
+
+\frame{
+	\begin{center}
+		\makebox[\textwidth]{\pgfimage[width=300pt]{school-of-rock.jpg}}
+		\ \newline
+		\tiny{\url{http://media.tumblr.com/tumblr_lvc6xhsyWN1qzs894.jpg}
+		      - 20.01.'13 - 13:50 CET}
+	\end{center}
+}
+
+
+\frame{
+	\begin{center}
+		Self-Repair for organisms:\\
+		\pause
+		\textbf{for free}
+	\end{center}
+}
+
+
+\frame{
+	Self-Repair at the cellular level:
+	\begin{itemize}
+		\item each cell contains complete copy of the 'genome' and
+		      therefore acts as a 'stem cell'
+		\ \newline
+		\pause
+
+		\item Result:\\
+		      every cell could literally replace \textit{any}
+		      other cell in the organism, just change it's coordinates
+		\ \newline
+		\pause
+
+		\item Twist:\\
+		      a faulty cell will 'kill' it's entire column
+		      of cells\\
+		      (to reduce replacement complexity)
+		\ \newline
+		\pause
+
+		\item 'scaring the grid' triggers recomputation of all of the
+		      cells coord's, and the state of the now dead cells need
+		      to be recovered/copied
+	\end{itemize}
+}
+
+\frame{
+	Self-Repair at molecular level:
+	\begin{itemize}
+		\item Downside:\\
+		      difficult, because we can't actually 'repair' faulty
+		      FPGA's
+		\ \newline
+		\pause
+
+		\item Upside:\\
+		      can program molecules, which means we can
+		      control (program!) the level of fault
+		      tolerance/robustness of our system
+		\ \newline
+		\pause
+
+		\item Mechanism:\\
+		      shift content of dead molecule to it's
+		      righthand neighbour and his content to his right
+		      hand neighbour, etc. 'till spare molecule is reached
+	\end{itemize}
+}
+
+%##########
+% Summary
+%##########
+
+\section{Summary}
+
+\frame{
+	\begin{center}
+		\makebox[\textwidth]{\pgfimage[width=180pt]{lesson.jpg}}
+		\ \newline
+		\tiny{\url{http://cdn.memegenerator.net/instances/250x250/32624089.jpg}
+		      - 20.01.'13 - 17:05 CET}
+	\end{center}
+}
+
+\frame{
+	Self-Repair:
+	\begin{itemize}
+		\item no 'repair', instead use spare elements
+		\item no centralized control mechanism, all done local
+		\ \newline
+
+		\item on-line self repair means:\\
+		      go off-line, reconfigure,
+		      go on-line again\\
+		      (but without intervention from 'outside')
+		\ \newline
+
+		\item mechanism opperates on \textbf{multiple} levels\\
+		      (molecular and cellular)
+		\ \newline
+
+		\item if molecules can't be repaired, trigger cellular
+		      self repair:
+			\begin{itemize}
+				\item  trigger column death of cells via
+			               'KILL' signal
+				\item  recompute cell coordinates
+			\end{itemize}
+
+	\end{itemize}
+}
+
+
+\frame{
+	Self-Replication:
+	\begin{itemize}
+		\item no 'replication', FGPA's need to already exist but
+		      are 'empty'
+		\ \newline
+
+		\item 'molecules' and 'cells' are connected, so they can
+		      propagate data among them
+		\ \newline
+
+		\item we construct the data to be propagated and therefor
+		      'program' an amount of molecules, which then clones
+		      itself, leading to clones of cells and ultimately
+		      clones of organism
+		\ \newline
+
+		\item process continues untill we run out of 'space'
+		\ \newline
+
+		\item creates identical clones, no FPGA mutation yet
+
+	\end{itemize}
+}
+
+
+\frame{
+\textbf{Main Source:}
+\begin{itemize}
+	\item Embryonics Approach:
+	\item http://lslwww.epfl.ch/pages/embryonics/thesis/
+\end{itemize}
+\ \newline
+
+\textbf{Other Projects:}
+\begin{itemize}
+	\item Field Programmable Gate Array (FPGA) for Bio-inspired
+	      visuo-motor control systems applied to Micro-Air Vehicles
+	\item http://www.intechopen.com/download/pdf/5965
+	\ \newline
+
+	\item On-chip visual perception of motion:\\
+	      A bio-inspired connectionist model on FPGA
+	\item www.loria.fr/~girau/Publis/NN.pdf
+\end{itemize}
+}
+
+
+
+
+
+\end{document}
