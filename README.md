@@ -1,4 +1,4 @@
-neural_computing_seminar
+Neural Computing Seminar
 ========================
 This is my contribution to the "Neural Computing" Seminar,
 held at Humboldt-Universität zu Berlin, in the winter semester 2012/2013.
